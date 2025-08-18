@@ -235,7 +235,7 @@
                             <input type="email" id="email" name="email" placeholder="Your Email" required>
                         </div>
                         <div class="form-group">
-                            <input type="tel" id="phone" name="phone" placeholder="Your Phone">
+                            <input type="tel" id="phone" name="phone" placeholder="Your Phone"reruired>
                         </div>
                         <div class="form-group">
                             <select id="subject" name="subject" required>
@@ -251,7 +251,9 @@
                             
                             <textarea id="message" name="message" placeholder="Your Message"  required></textarea>
                         </div>
-                        <button type="submit" class="btn btn-primary">Send Message</button>
+                        
+                        <button type="submit" class="btn-outline"  >Send Message</button>
+                        
                     </form>
                 </div>
             </div>
@@ -301,10 +303,12 @@
                 <div class="footer-section">
                     <h3>Newsletter</h3>
                     <p>Subscribe to get updates about new courses and events.</p>
-                    
-                        <input type="email" name="newsletter" placeholder="Enter your email" required>
-                        <button type="submit">Subscribe</button>
-                    
+                    <form id="contactForm" action="confirm.html" method="get">
+                        <div class="form-group">
+                        <input type="email" name="email" placeholder="Enter your email" required>
+                    </div>
+                        <button type="submit" class="btn btn-primary">Subscribe</button>
+                    </form>
                 </div>
             </div>
             <div class="footer-bottom">
