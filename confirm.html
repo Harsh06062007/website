@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neon Classes - Confirmation</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .confirm-hero {
+            padding: 140px 0 80px;
+            background: var(--gradient-primary);
+            color: #fff;
+            text-align: center;
+        }
+        .confirm-card {
+            background: #fff;
+            max-width: 720px;
+            margin: -60px auto 40px;
+            padding: 2rem;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
+            text-align: center;
+        }
+        .confirm-icon {
+            width: 84px;
+            height: 84px;
+            border-radius: 50%;
+            background: rgba(102,126,234,0.12);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-500);
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        .confirm-title { color: var(--text-900); margin-bottom: .5rem; }
+        .confirm-subtitle { color: var(--text-600); margin-bottom: 1.25rem; }
+        .details { color: var(--text-700); margin: 1rem 0 1.5rem; }
+        .cta-row { display: flex; gap: .75rem; justify-content: center; flex-wrap: wrap; }
+        .cta-row .btn { min-width: 180px; }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-graduation-cap"></i>
+                <span>Neon Classes</span>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="index.html#home" class="nav-link">Home</a></li>
+                <li class="nav-item"><a href="index.html#courses" class="nav-link">Courses</a></li>
+                <li class="nav-item"><a href="index.html#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <section class="confirm-hero">
+        <div class="container">
+            <h1 class="section-title" style="color:#fff; margin-bottom:0;">Submission Received</h1>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <div class="confirm-card">
+                <div class="confirm-icon">
+                    <i class="fas fa-check"></i>
+                </div>
+                <h2 class="confirm-title" id="greet">Thank you!</h2>
+                <p class="confirm-subtitle">Your request has been submitted. We will contact you shortly.</p>
+                <div class="details" id="details"></div>
+                <div class="cta-row">
+                    <a href="index.html" class="btn btn-secondary">Back to Home</a>
+                    <a id="whatsappCta" href="#" target="_blank" rel="noopener" class="btn btn-primary"><i class="fab fa-whatsapp"></i>&nbsp;Chat on WhatsApp</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2024 Neon Classes. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        (function(){
+            const params = new URLSearchParams(window.location.search);
+            const name = params.get('name');
+            const email = params.get('email');
+            const phone = params.get('phone');
+            const subject = params.get('subject') || params.get('newsletter');
+
+            const greet = document.getElementById('greet');
+            if (name) greet.textContent = `Thank you, ${name}!`;
+
+            const details = document.getElementById('details');
+            const lines = [];
+            if (subject) lines.push(`Subject: ${subject}`);
+            if (email) lines.push(`Email: ${email}`);
+            if (phone) lines.push(`Phone: ${phone}`);
+            if (lines.length) {
+                details.innerHTML = lines.map(l => `<div>${l}</div>`).join('');
+            }
+
+            // Build WhatsApp CTA link (replace number with your own if needed)
+            const number = '919876543210'; // placeholder; update to your number
+            const text = encodeURIComponent(`Hello Neon Classes, I submitted a request${name ? ' - ' + name : ''}.`);
+            const wa = document.getElementById('whatsappCta');
+            wa.href = `https://wa.me/${number}?text=${text}`;
+        })();
+    </script>
+    <script src="script.js"></script>
+</body>
+</html>
