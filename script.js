@@ -106,8 +106,9 @@ if (newsletterForm) {
             return;
         }
         
-        const params = new URLSearchParams({ newsletter: email });
-        window.location.href = `confirm.html?${params.toString()}`;
+        const params = new URLSearchParams({ name, email, phone, subject });
+window.location.href = `confirm.html?${params.toString()}`;
+
     });
 }
 
