@@ -85,7 +85,7 @@ if (contactForm) {
 }
 
         
-        // Redirect to confirmation page with details
+         // Redirect to confirmation page with details
         const params = new URLSearchParams({ name, email, phone, subject });
         window.location.href = `confirm.html?${params.toString()}`;
     });
