@@ -1,4 +1,4 @@
-// Mobile Navigation Toggle
+    // Mobile Navigation Toggle
 const hamburger = document.querySelector('.hamburger');
 const navMenu = document.querySelector('.nav-menu');
 
@@ -42,6 +42,7 @@ window.addEventListener('scroll', () => {
 });
 
 // Contact Form Handling
+// Contact Form Handling
 const contactForm = document.getElementById('contactForm');
 if (contactForm) {
     contactForm.addEventListener('submit', function(e) {
@@ -65,6 +66,24 @@ if (contactForm) {
             showNotification('Please enter a valid email address.', 'error');
             return;
         }
+
+        // ✅ Send to Google Sheets (replace with your deployed Web App URL)
+        fetch("https://script.google.com/macros/s/AKfycbx_peAHu2cX8zeTaytfWkYcnCD7lie_JmaIwm_rpcX7UXxHVH_CWfgjYX0Xr31Q_LdT/exec", {
+            method: "POST",
+            body: JSON.stringify({ name, email, phone, subject, message })
+        })
+        .then(res => res.text())
+        .then(() => {
+            showNotification('✅ Form submitted successfully!', 'success');
+            contactForm.reset(); // clear form
+        })
+        .catch(err => {
+            console.error(err);
+            showNotification('❌ Error submitting form. Please try again.', 'error');
+        });
+    });
+}
+
         
         // Redirect to confirmation page with details
         const params = new URLSearchParams({ name, email, phone, subject });
