@@ -45,53 +45,37 @@ window.addEventListener('scroll', () => {
 // Contact Form Handling
 
          // Contact Form Handling
+// Contact Form Handling
 const contactForm = document.getElementById('contactForm');
 if (contactForm) {
     contactForm.addEventListener('submit', function(e) {
         e.preventDefault();
-        
-        // Get form data
-        const formData = new FormData(this);
-        const name = formData.get('name');
-        const email = formData.get('email');
-        const phone = formData.get('phone');
-        const subject = formData.get('subject');
-        const message = formData.get('message');
-        
+
+        // Collect form data
+        const formData = new FormData(contactForm);
+
         // Basic validation
-        if (!name || !email || !subject || !message) {
+        if (!formData.get('name') || !formData.get('email') || !formData.get('subject') || !formData.get('message')) {
             showNotification('Please fill in all required fields.', 'error');
             return;
         }
-        
-        if (!isValidEmail(email)) {
+        if (!isValidEmail(formData.get('email'))) {
             showNotification('Please enter a valid email address.', 'error');
             return;
         }
 
-        // ✅ Send to Google Sheets (replace with your deployed Web App URL)
+        // ✅ Send to Google Sheets (replace URL with your own web app link if needed)
         fetch("https://script.google.com/macros/s/AKfycbx_peAHu2cX8zeTaytfWkYcnCD7lie_JmaIwm_rpcX7UXxHVH_CWfgjYX0Xr31Q_LdT/exec", {
             method: "POST",
-            body: JSON.stringify({ name, email, phone, subject, message })
+            body: formData
         })
         .then(res => res.text())
         .then(() => {
             showNotification('✅ Form submitted successfully!', 'success');
-            contactForm.reset(); // clear form
+            contactForm.reset();
         })
         .catch(err => {
-            console.error(err);
-            showNotification('❌ Error submitting form. Please try again.', 'error');
-        });
-    });
-}
 
-        
-         // Redirect to confirmation page with details
-        const params = new URLSearchParams({ name, email, phone, subject });
-        window.location.href = `confirm.html?${params.toString()}`;
-    });
-}
 
 // Newsletter Form Handling
 const newsletterForm = document.querySelector('.newsletter-form');
