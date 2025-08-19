@@ -227,33 +227,26 @@
                         </div>
                     </div>
                 </div>
-                <script>
-document.getElementById("contactForm").addEventListener("submit", function(e) {
-    e.preventDefault();
-
-    const data = {
-        name: document.getElementById("name").value,
-        email: document.getElementById("email").value,
-        phone: document.getElementById("phone").value,
-        subject: document.getElementById("subject").value,
-        message: document.getElementById("message").value
-    };
-
-    fetch("YOUR_WEB_APP_URL", {
-        method: "POST",
-        body: JSON.stringify(data)
-    })
-    .then(res => res.text())
-    .then(response => {
-        alert("✅ Your message has been sent!");
-        document.getElementById("contactForm").reset();
-    })
-    .catch(error => {
-        alert("❌ Error sending message. Try again later.");
-        console.error(error);
-    });
-});
-</script>
+                <form id="contactForm">
+                    <div class="form-group">
+                        <input type="text" id="name" name="name" placeholder="Your Name" required>
+                    </div> 
+                    <div class="form-group"> <input type="email" id="email" name="email" placeholder="Your Email" required> 
+                        </div>
+                    <div class="form-group"> <input type="tel" id="phone" name="phone" placeholder="Your Phone">
+                        </div> 
+                    <div class="form-group">
+                        <select id="subject" name="subject" required>
+                            <option value="">Select Subject</option>
+                        <option value="mathematics">Mathematics</option>
+                        <option value="science">Science</option> 
+                            <option value="english">English</option>
+                            <option value="social-studies">Social Studies</option
+                            <option value="other">Other</option> </select>
+                    </div>
+                    <div class="form-group">
+                        <textarea id="message" name="message" placeholder="Your Message" required></textarea> </div> <button type="submit" class="btn-outline">Send Message</button>
+                </form>
 
 
                         
