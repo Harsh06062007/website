@@ -43,6 +43,8 @@ window.addEventListener('scroll', () => {
 
 // Contact Form Handling
 // Contact Form Handling
+
+         // Contact Form Handling
 const contactForm = document.getElementById('contactForm');
 if (contactForm) {
     contactForm.addEventListener('submit', function(e) {
