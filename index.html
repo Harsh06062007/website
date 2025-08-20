@@ -260,24 +260,29 @@
 <script>
   const scriptURL = "https://script.google.com/macros/s/AKfycbxTFAli4e8LUOqWfW5CdN-iZYrHpobqP0pAndnByhRTNxCBpxjnP4yoVo64QaQF-FE/exec";
 
-  const form = document.getElementById("contactForm");
-  const status = document.getElementById("status");
-
-  form.addEventListener("submit", e => {
+   document.getElementById("contactForm").addEventListener("submit", e => {
     e.preventDefault();
+    let formData = {
+      name: e.target.name.value,
+      email: e.target.email.value,
+      phone: e.target.phone.value,
+      subject: e.target.subject.value,
+      message: e.target.message.value
+    };
 
-    const formData = new FormData(form);
-
-    fetch(scriptURL, { method: "POST", body: formData })
-      .then(response => {
-        status.innerText = "✅ Message sent successfully!";
-        form.reset();
-      })
-      .catch(error => {
-        status.innerText = "❌ Error! Please try again.";
-        console.error("Error!", error.message);
-      });
-  });
+    fetch(scriptURL, {
+      method: "POST",
+      body: JSON.stringify(formData)
+    })
+    .then(res => res.json())
+    .then(response => {
+      document.getElementById("status").innerText = "Message sent successfully!";
+      e.target.reset();
+    })
+    .catch(err => {
+      document.getElementById("status").innerText = "Error! Please try again.";
+    });
+  });
 </script>
 
     <!-- Footer -->
