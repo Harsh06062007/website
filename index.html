@@ -227,12 +227,33 @@
                         </div>
                     </div>
                 </div>
-                <form id="contactForm">
-  <input type="text" name="name" placeholder="Your Name" required>
-  <input type="email" name="email" placeholder="Your Email" required>
-  <textarea name="message" placeholder="Your Message" required></textarea>
-  <button type="submit">Send</button>
-</form>
+                <form id="contactForm" >
+                        <div class=" form-group">
+                            <input type="text" id="name" name="name" placeholder="Your Name" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" id="email" name="email" placeholder="Your Email" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="tel" id="phone" name="phone" placeholder="Your Phone">
+                        </div>
+                        <div class="form-group">
+                            <select id="subject" name="subject" required>
+                                <option value="">Select Subject</option>
+                                <option value="mathematics">Mathematics</option>
+                                <option value="science">Science</option>
+                                <option value="english">English</option>
+                                <option value="social-studies">Social Studies</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            
+                            <textarea id="message" name="message" placeholder="Your Message"  required></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn-outline"  >Send Message</button>
+                        
 
 <p id="status"></p>
 
@@ -244,6 +265,8 @@
     let formData = {
       name: e.target.name.value,
       email: e.target.email.value,
+      phone: e.target.phone.value,
+      subject: e.target.subject.value,
       message: e.target.message.value
     };
 
@@ -309,7 +332,7 @@
                         <div class="form-group">
                         <input type="email" name="email" placeholder="Enter your email" required>
                     </div>
-                        <button type="submit" class="btn btn-primary">Subscribe</button>
+                        <button type="submit" class=""btn-outline">Subscribe</button>
                     </form>
                 </div>
             </div>
