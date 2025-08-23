@@ -73,6 +73,11 @@
                 <div class="hero-buttons">
                     <a href="#courses" class="btn btn-primary">Explore Courses</a>
                     <a href="#contact" class="btn btn-secondary">Get Started</a>
+                    <!-- Naya Download App Button -->
+                   <button id="installAppBtn" class="btn btn-outline" style="display:none;">
+                   📲 Download App
+                 </button>
+
                 </div>
             </div>
             <div class="hero-image">
@@ -349,6 +354,29 @@
     });
   });
     </script>
+                    <script>
+  let deferredPrompt;
+  const installBtn = document.getElementById("installAppBtn");
+
+  window.addEventListener("beforeinstallprompt", (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    installBtn.style.display = "inline-block"; // Button dikhado
+  });
+
+  installBtn.addEventListener("click", () => {
+    installBtn.style.display = "none";
+    deferredPrompt.prompt();
+    deferredPrompt.userChoice.then((choiceResult) => {
+      if (choiceResult.outcome === "accepted") {
+        console.log("User accepted the install prompt");
+      } else {
+        console.log("User dismissed the install prompt");
+      }
+      deferredPrompt = null;
+    });
+  });
+</script>
 </div>
     </div>
     </div>
