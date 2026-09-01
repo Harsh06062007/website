@@ -215,7 +215,180 @@
 
 </section>
 
+<script>
+let attendanceData = JSON.parse(localStorage.getItem("neonAttendance")) || [];
 
+function addStudent() {
+
+    let name = document.getElementById("studentName").value.trim();
+    let date = document.getElementById("attendanceDate").value;
+
+    if (name === "") {
+        alert("Please enter student name");
+        return;
+    }
+
+    if (date === "") {
+        alert("Please select date");
+        return;
+    }
+
+    let student = {
+        id: Date.now(),
+        name: name,
+        date: date,
+        status: "Not Marked"
+    };
+
+    attendanceData.push(student);
+
+    localStorage.setItem(
+        "neonAttendance",
+        JSON.stringify(attendanceData)
+    );
+
+    document.getElementById("studentName").value = "";
+
+    displayAttendance();
+}
+
+
+function markPresent(id) {
+
+    let student = attendanceData.find(s => s.id === id);
+
+    if (student) {
+        student.status = "Present";
+    }
+
+    localStorage.setItem(
+        "neonAttendance",
+        JSON.stringify(attendanceData)
+    );
+
+    displayAttendance();
+}
+
+
+function markAbsent(id) {
+
+    let student = attendanceData.find(s => s.id === id);
+
+    if (student) {
+        student.status = "Absent";
+    }
+
+    localStorage.setItem(
+        "neonAttendance",
+        JSON.stringify(attendanceData)
+    );
+
+    displayAttendance();
+}
+
+
+function deleteStudent(id) {
+
+    attendanceData = attendanceData.filter(
+        s => s.id !== id
+    );
+
+    localStorage.setItem(
+        "neonAttendance",
+        JSON.stringify(attendanceData)
+    );
+
+    displayAttendance();
+}
+
+
+function getPercentage(name) {
+
+    let records = attendanceData.filter(
+        s => s.name.toLowerCase() === name.toLowerCase()
+    );
+
+    let total = records.filter(
+        s => s.status === "Present" || s.status === "Absent"
+    ).length;
+
+    let present = records.filter(
+        s => s.status === "Present"
+    ).length;
+
+    if (total === 0) {
+        return "0%";
+    }
+
+    return Math.round((present / total) * 100) + "%";
+}
+
+
+function displayAttendance() {
+
+    let list = document.getElementById("attendanceList");
+
+    list.innerHTML = "";
+
+    attendanceData.forEach(student => {
+
+        let statusClass = "";
+
+        if (student.status === "Present") {
+            statusClass = "present";
+        }
+
+        if (student.status === "Absent") {
+            statusClass = "absent";
+        }
+
+        list.innerHTML += `
+            <tr>
+
+                <td>${student.name}</td>
+
+                <td>${student.date}</td>
+
+                <td class="${statusClass}">
+                    ${student.status}
+                </td>
+
+                <td>
+                    <button
+                        class="present-btn"
+                        onclick="markPresent(${student.id})">
+                        Present
+                    </button>
+                </td>
+
+                <td>
+                    <button
+                        class="absent-btn"
+                        onclick="markAbsent(${student.id})">
+                        Absent
+                    </button>
+                </td>
+
+                <td>
+                    ${getPercentage(student.name)}
+                </td>
+
+                <td>
+                    <button
+                        class="delete-btn"
+                        onclick="deleteStudent(${student.id})">
+                        Delete
+                    </button>
+                </td>
+
+            </tr>
+        `;
+    });
+}
+
+
+displayAttendance();
+</script>
 <script src="Attendance.js"></script>
 
 </body>
