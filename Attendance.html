@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Attendance - Neon Classes</title>
+
+    <link rel="stylesheet" href="styles.css">
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+          rel="stylesheet">
+
+    <style>
+        .attendance-page {
+            min-height: 100vh;
+            padding: 120px 20px 50px;
+            background: #f5f7ff;
+        }
+
+        .attendance-box {
+            max-width: 1000px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.1);
+        }
+
+        .attendance-title {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .student-form {
+            display: grid;
+            grid-template-columns: 1fr 1fr auto;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .student-form input,
+        .student-form select {
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 15px;
+        }
+
+        .attendance-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .attendance-table th,
+        .attendance-table td {
+            padding: 14px;
+            border-bottom: 1px solid #ddd;
+            text-align: center;
+        }
+
+        .attendance-table th {
+            background: #4a00e0;
+            color: white;
+        }
+
+        .present-btn,
+        .absent-btn,
+        .delete-btn {
+            border: none;
+            padding: 8px 14px;
+            border-radius: 6px;
+            cursor: pointer;
+            color: white;
+            margin: 3px;
+        }
+
+        .present-btn {
+            background: #28a745;
+        }
+
+        .absent-btn {
+            background: #dc3545;
+        }
+
+        .delete-btn {
+            background: #555;
+        }
+
+        .present {
+            color: #28a745;
+            font-weight: bold;
+        }
+
+        .absent {
+            color: #dc3545;
+            font-weight: bold;
+        }
+
+        .percentage {
+            font-weight: bold;
+        }
+
+        @media (max-width: 700px) {
+            .student-form {
+                grid-template-columns: 1fr;
+            }
+
+            .attendance-box {
+                padding: 15px;
+                overflow-x: auto;
+            }
+
+            .attendance-table {
+                min-width: 750px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- Navigation -->
+<nav class="navbar">
+    <div class="nav-container">
+
+        <div class="nav-logo">
+            <i class="fas fa-graduation-cap"></i>
+            <span>Neon Classes</span>
+        </div>
+
+        <ul class="nav-menu">
+            <li class="nav-item">
+                <a href="index.html" class="nav-link">Home</a>
+            </li>
+
+            <li class="nav-item">
+                <a href="index.html#about" class="nav-link">About</a>
+            </li>
+
+            <li class="nav-item">
+                <a href="index.html#courses" class="nav-link">Courses</a>
+            </li>
+
+            <li class="nav-item">
+                <a href="attendance.html" class="nav-link">Attendance</a>
+            </li>
+
+            <li class="nav-item">
+                <a href="index.html#contact" class="nav-link">Contact</a>
+            </li>
+        </ul>
+
+    </div>
+</nav>
+
+
+<!-- Attendance -->
+<section class="attendance-page">
+
+    <div class="attendance-box">
+
+        <h1 class="attendance-title">
+            <i class="fas fa-calendar-check"></i>
+            Student Attendance
+        </h1>
+
+        <!-- Add Student -->
+        <div class="student-form">
+
+            <input
+                type="text"
+                id="studentName"
+                placeholder="Enter Student Name"
+            >
+
+            <input
+                type="date"
+                id="attendanceDate"
+            >
+
+            <button
+                class="btn btn-primary"
+                onclick="addStudent()"
+            >
+                Add Student
+            </button>
+
+        </div>
+
+
+        <!-- Attendance Table -->
+
+        <table class="attendance-table">
+
+            <thead>
+                <tr>
+                    <th>Student Name</th>
+                    <th>Date</th>
+                    <th>Status</th>
+                    <th>Present</th>
+                    <th>Absent</th>
+                    <th>Percentage</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+
+            <tbody id="attendanceList">
+            </tbody>
+
+        </table>
+
+    </div>
+
+</section>
+
+
+<script src="attendance.js"></script>
+
+</body>
+</html>
