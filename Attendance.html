@@ -231,12 +231,16 @@ let attendanceData = JSON.parse(localStorage.getItem("neonAttendance")) || [];
 function addStudent() {
 
     let name = document.getElementById("studentName").value.trim();
+    let studentClass = document.getElementById("studentClass").value;
     let date = document.getElementById("attendanceDate").value;
 
     if (name === "") {
         alert("Please enter student name");
         return;
     }
+    if (studentClass === "") {
+        alert("Please select class");
+        return;
 
     if (date === "") {
         alert("Please select date");
@@ -246,6 +250,7 @@ function addStudent() {
     let student = {
         id: Date.now(),
         name: name,
+        studentClass: studentClass,
         date: date,
         status: "Not Marked"
     };
@@ -258,6 +263,7 @@ function addStudent() {
     );
 
     document.getElementById("studentName").value = "";
+        document.getElementById("studentClass").value = "";
 
     displayAttendance();
 }
